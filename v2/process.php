@@ -178,7 +178,7 @@ foreach($todas_claves as $columna_clave => $hijos) {
                 foreach($database->obtener_hijos_para($hijos, $columna_clave, $fila[$columna_clave]) as $id_hijo) {
                     $document->startElement("a");
                     $document->writeAttribute('href', $baseurl.'/'. $hijos.'/'. slugify($id_hijo));
-                    $document->text($id_hijo);
+                    $document->text($id_hijo == 'prueba' ? "MESAS COMPENSADORAS" : $id_hijo);
                     $document->endElement();
                 }
             }
@@ -188,16 +188,32 @@ foreach($todas_claves as $columna_clave => $hijos) {
 
         }
 
+        $totalVotos = 0;
+        $maxVotos = 0;
+        foreach($fila['votos'] as  $votos) {
+            $totalVotos += $votos;
+            if($votos > $maxVotos) {
+                $maxVotos = $votos;
+            }
+        }
+
+
         $document->endElement();
         $document->startElement('section');
         $document->writeElement('h2', 'VOTOS VALIDADOS POR FUERZA POLITICA');
         if($columna_clave) {
             $document->startElement('h1');
-            $document->text("$columna_clave {$fila[$columna_clave]}");
+            if($fila[$columna_clave] == 'prueba') {
+                $document->text('MESAS COMPENSADORAS - Votos totales ' . $totalVotos);
+            } else {
+                $document->text("$columna_clave {$fila[$columna_clave]} - Votos totales " . $totalVotos);
+            }
+
+            
             $document->endElement();
         } else {
             $document->startElement('h1');
-            $document->text('Resultados Generales');
+            $document->text('Resultados Generales - Votos totales ' . $totalVotos);
             $document->endElement();
             
         }
@@ -224,15 +240,15 @@ foreach($todas_claves as $columna_clave => $hijos) {
         
         $document->startElement('tbody');
 
-        $totalVotos = 0;
-        $maxVotos = 0;
-        foreach($fila['votos'] as  $votos) {
-            $totalVotos += $votos;
-            if($votos > $maxVotos) {
-                $maxVotos = $votos;
-            }
-        }
+        
 
+        $document->startElement('tr');
+        $document->writeElement(name: 'td');
+        $document->writeElement('td','VOTOS TOTALES');
+        $document->writeElement('td');
+        $document->writeElement('td', $totalVotos);
+        $document->writeElement('td');
+        $document->endElement();
 
         foreach($fila['votos'] as $orden => $votos) {
             $document->startElement('tr');

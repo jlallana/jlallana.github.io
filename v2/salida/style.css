@@ -87,3 +87,16 @@ svg {
 }
 
 
+
+
+section:first-child {
+    max-width: 1200px;;
+}
+
+table {
+    font-size: 12px;
+}
+
+h1, h2 {
+    text-transform: uppercase;
+}
