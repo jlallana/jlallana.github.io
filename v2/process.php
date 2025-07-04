@@ -106,9 +106,9 @@ $fuerzas = [
 
 $todas_claves = [
     '' => 'seccion',
-    'mesa' => '',
-    'establecimiento' => 'mesa',
-    'seccion' => 'establecimiento'
+    //'mesa' => '',
+    //'establecimiento' => 'mesa',
+    //'seccion' => 'establecimiento'
 ];
 
 
@@ -165,13 +165,18 @@ foreach($todas_claves as $columna_clave => $hijos) {
 
 
         
-        $document->startElement('section');
+        
         if($hijos) {
+            $document->startElement('section');
             $document->writeElement('h2', "POR $hijos");
-            
-
 
             if(!$columna_clave) {
+                $document->startElement('a');
+                $document->writeAttribute('href', $baseurl.'/mesa/30999');
+                $document->text('Privados de libertad');
+                $document->endElement();
+
+
                 $document->writeRaw(file_get_contents('mapa.svg'));
             } else {
 
@@ -182,14 +187,22 @@ foreach($todas_claves as $columna_clave => $hijos) {
                     $document->endElement();
                 }
             }
-
-            
-
-
+             $document->endElement();
         }
 
+       
+
+        
         $totalVotos = 0;
         $maxVotos = 0;
+
+
+
+        $votosEnBlanco = $fila['votos'][18] ?? 0;
+        $votosImpugnados = $fila['votos'][19] ?? 0;
+        $votosNulos = $fila['votos'][20] ?? 0;
+        $votosRecurridos = $fila['votos'][21] ?? 0;
+        
         foreach($fila['votos'] as  $votos) {
             $totalVotos += $votos;
             if($votos > $maxVotos) {
@@ -198,31 +211,83 @@ foreach($todas_claves as $columna_clave => $hijos) {
         }
 
 
-        $document->endElement();
+        
         $document->startElement('section');
-        $document->writeElement('h2', 'VOTOS VALIDADOS POR FUERZA POLITICA');
         if($columna_clave) {
-            $document->startElement('h1');
+            $document->startElement('h2');
             if($fila[$columna_clave] == 'prueba') {
-                $document->text('MESAS COMPENSADORAS - Votos totales ' . $totalVotos);
+                $document->text('MESAS COMPENSADORAS');
             } else {
-                $document->text("$columna_clave {$fila[$columna_clave]} - Votos totales " . $totalVotos);
+                $document->text("$columna_clave {$fila[$columna_clave]}");
             }
 
             
             $document->endElement();
         } else {
             $document->startElement('h1');
-            $document->text('Resultados Generales - Votos totales ' . $totalVotos);
+            $document->text('Resultados Generales');
             $document->endElement();
-            
         }
+
+        $document->startElement('table');
+        $document->startElement('thead');
+        $document->startElement('tr');
+        $document->writeElement('th', content: 'DETALLE');
+        $document->writeElement('th', 'CANTIDAD');
+        $document->endElement();
+        $document->endElement();
+
+
+        $document->startElement('tbody');
+        $document->startElement('tr');
+
+
+        
+        $document->writeElement('th', 'VOTOS TOTALES');
+        $document->writeElement('td', number_format($totalVotos, 2, '.', ','));     
+        $document->endElement();
+
+        $validos = $totalVotos - $votosEnBlanco - $votosImpugnados - $votosNulos - $votosRecurridos;
+
+        $document->startElement('tr');
+        $document->writeElement('th', 'Votos validos');
+        $document->writeElement('td', number_format($validos , 2, '.', ','));     
+        $document->endElement(); 
+
+        $document->startElement('tr');
+        $document->writeElement('th', 'Votos en blanco');
+        $document->writeElement('td', number_format($votosEnBlanco, 2, '.', ','));     
+        $document->endElement(); 
+
+
+        $document->startElement('tr');
+        $document->writeElement('th', 'Votos impugnados');
+        $document->writeElement('td', number_format($votosImpugnados, 2, '.', ','));     
+        $document->endElement(); 
+
+        $document->startElement('tr');
+        $document->writeElement('th', 'Votos nulos');
+        $document->writeElement('td', number_format($votosNulos, 2, '.', ','));     
+        $document->endElement(); 
+
+
+        $document->startElement('tr');
+        $document->writeElement('th', 'Votos recurridos');
+        $document->writeElement('td', number_format($votosRecurridos, 2, '.', ','));     
+        $document->endElement(); 
+
+        $document->endElement();
+
+
+        $document->endElement();
+
+
         $document->startElement('table');
 
         $document->startElement('thead');
         $document->startElement('tr');
+        $document->writeElement(name: 'th');
         $document->startElement('th');
-        $document->writeAttribute('colspan', '2');
         $document->text('AGRUPACIÓN');
         $document->endElement();
 
@@ -232,7 +297,7 @@ foreach($todas_claves as $columna_clave => $hijos) {
 
         $document->startElement('th');
         $document->writeAttribute('colspan', '2');
-        $document->text('VOTOS');
+        $document->text('CANTIDAD DE VOTOS');
         $document->endElement();
         $document->endElement();
         $document->endElement();
@@ -244,16 +309,16 @@ foreach($todas_claves as $columna_clave => $hijos) {
 
         $document->startElement('tr');
         $document->writeElement(name: 'td');
-        $document->writeElement('td','VOTOS TOTALES');
-        $document->writeElement('td');
-        $document->writeElement('td', $totalVotos);
+        $document->writeElement('th','VOTOS TOTALES');
+        $document->writeElement('th', '100%');
+        $document->writeElement('th',  number_format($totalVotos, 2, '.', ','));
         $document->writeElement('td');
         $document->endElement();
 
         foreach($fila['votos'] as $orden => $votos) {
             $document->startElement('tr');
             
-            $document->startElement('td');
+            $document->startElement('th');
             $document->text($orden);
             $document->endElement();
 
@@ -272,7 +337,8 @@ foreach($todas_claves as $columna_clave => $hijos) {
             $document->endElement();
 
             $document->startElement('td');
-            $document->text($votos);
+
+            $document->text( number_format($votos, 2, '.', ','));
             $document->endElement();
 
             $document->startElement('td');

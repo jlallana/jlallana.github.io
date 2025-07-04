@@ -53,14 +53,23 @@ main {
     overflow: auto;
     display: flex;
     flex-direction: column;
+    background-color: #f2f2f2;
 }
 
-th {
+thead th {
     background-color: #8c1d29;
     color: white;
 }
 
-tr:nth-child(odd) {
+tbody th {
+    font-weight: bold;
+}
+
+th {
+    text-align: left;;
+}
+
+tr:nth-child(even) {
     background-color: #e3e3e3;
 }
 
@@ -89,14 +98,41 @@ svg {
 
 
 
-section:first-child {
-    max-width: 1200px;;
+section {
+    width: 800px;
+    height: 700px;
+    overflow-y: auto;
+    margin: 20px;
+    background-color: white;;
 }
 
 table {
     font-size: 12px;
+    width: 100%;
 }
 
 h1, h2 {
     text-transform: uppercase;
+}
+
+td:nth-child(3) , td:nth-child(4) ,
+
+th:nth-child(3) , tbody th:nth-child(4) {
+    text-align: right;
+}
+
+table:nth-of-type(1) td:nth-child(2) {
+    text-align: right;
+}
+
+table:nth-of-type(1)  {
+    margin-bottom: 10px;
+}
+
+section {
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+
+    
 }
