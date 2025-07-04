@@ -166,7 +166,7 @@ foreach($todas_claves as $columna_clave => $hijos) {
 
         if($hijos) {
             $document->startElement('section');
-            $document->writeElement('h2', "POR $hijos");
+            $document->writeElement('h2', "POR " . ($hijos == 'seccion' ? 'comuna' : $hijos));
 
             if(!$columna_clave) {
                 $document->startElement('a');
