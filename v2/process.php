@@ -106,9 +106,9 @@ $fuerzas = [
 
 $todas_claves = [
     '' => 'seccion',
-    //'mesa' => '',
-    //'establecimiento' => 'mesa',
-    //'seccion' => 'establecimiento'
+    'mesa' => '',
+    'establecimiento' => 'mesa',
+    'seccion' => 'establecimiento'
 ];
 
 
