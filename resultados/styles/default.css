@@ -4,7 +4,7 @@
 }
 
 path ,  circle {
-    fill: gray
+    fill: #929292
 }
 
 
@@ -13,23 +13,15 @@ text {
     fill: white;
 }
 
-a[href="#comuna-5"] path {
-    fill: blue;
+
+a path:hover , a:hover circle {
+    fill: #7a322f;
 }
 
 
-a[href="#comuna-5"] circle {
-    fill: blue;
-}
 
 
-a[href="#comuna-5"]:hover circle {
-    fill: white;
-}
 
-a[href="#comuna-5"]:hover text {
-    fill: blue;
-}
 
 
 body {

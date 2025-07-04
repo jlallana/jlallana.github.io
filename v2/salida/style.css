@@ -1,3 +1,22 @@
+body {
+    font-family: arial;
+    margin: 0;
+}
+
+
+path ,  circle {
+    fill: #929292
+}
+
+
+text {
+    fill: white;
+}
+
+
+a:hover path , a:hover circle {
+    fill: #7a322f;
+}
 
 
 a:link, a:visited {
@@ -8,4 +27,59 @@ a:link, a:visited {
     margin: 4px;
     border-radius: 4px;
     display: inline-block;
+}
+
+body {
+    font-family: arial;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+}
+
+header {
+    background-color: white;
+    padding: 20px;
+    text-align: left;
+}
+
+main {
+    padding: 10px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+th {
+    background-color: #8c1d29;
+    color: white;
+}
+
+tr:nth-child(odd) {
+    background-color: #e3e3e3;
+}
+
+td, th {
+    white-space: nowrap;
+    padding: 3px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+main section:first-child {
+    width: 800px;
+}
+
+svg {
+    width: 100%;
+    height: auto;
 }

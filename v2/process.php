@@ -152,30 +152,29 @@ foreach($todas_claves as $columna_clave => $hijos) {
         $document->endElement();
         $document->startElement('body');
 
+
+        $document->startElement('header');
+        $document->startElement('img');
+        $document->writeAttribute('src', $baseurl.'/logo.svg');
+        $document->endElement();
+        $document->endElement();
+
+        $document->startElement('main');
+
         
-        if($columna_clave) {
-            $document->startElement('h1');
-            $document->text("$columna_clave {$fila[$columna_clave]}");
-            $document->endElement();
-        } else {
-            $document->startElement('h1');
-            $document->text('Resultados Generales');
-            $document->endElement();
-        }
 
 
+        
+        $document->startElement('section');
         if($hijos) {
             $document->writeElement('h2', "POR $hijos");
+            
 
 
             if(!$columna_clave) {
-                foreach($database->obtener_hijos($hijos) as $id_hijo) {
-                    $document->startElement("a");
-                    $document->writeAttribute('href', $baseurl.'/'. $hijos.'/'. slugify($id_hijo));
-                    $document->text($id_hijo);
-                    $document->endElement();
-                }
+                $document->writeRaw(file_get_contents('mapa.svg'));
             } else {
+
                 foreach($database->obtener_hijos_para($hijos, $columna_clave, $fila[$columna_clave]) as $id_hijo) {
                     $document->startElement("a");
                     $document->writeAttribute('href', $baseurl.'/'. $hijos.'/'. slugify($id_hijo));
@@ -189,9 +188,19 @@ foreach($todas_claves as $columna_clave => $hijos) {
 
         }
 
-
+        $document->endElement();
+        $document->startElement('section');
         $document->writeElement('h2', 'VOTOS VALIDADOS POR FUERZA POLITICA');
-        
+        if($columna_clave) {
+            $document->startElement('h1');
+            $document->text("$columna_clave {$fila[$columna_clave]}");
+            $document->endElement();
+        } else {
+            $document->startElement('h1');
+            $document->text('Resultados Generales');
+            $document->endElement();
+            
+        }
         $document->startElement('table');
 
         $document->startElement('thead');
@@ -206,6 +215,7 @@ foreach($todas_claves as $columna_clave => $hijos) {
         $document->endElement();
 
         $document->startElement('th');
+        $document->writeAttribute('colspan', '2');
         $document->text('VOTOS');
         $document->endElement();
         $document->endElement();
@@ -261,7 +271,8 @@ foreach($todas_claves as $columna_clave => $hijos) {
 
             
         }
-
+        $document->endElement(); 
+        $document->endElement(); 
         $document->endElement();
         $document->endDocument();
     }
