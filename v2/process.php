@@ -159,13 +159,11 @@ foreach($todas_claves as $columna_clave => $hijos) {
         $document->endElement();
         $document->endElement();
 
+
+        $document->writeElement('nav', 'Resultados Elecciones 2025');
+
         $document->startElement('main');
 
-        
-
-
-        
-        
         if($hijos) {
             $document->startElement('section');
             $document->writeElement('h2', "POR $hijos");
