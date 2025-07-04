@@ -22,11 +22,15 @@ a:hover path , a:hover circle {
 a:link, a:visited {
     text-decoration: none;
     color: white;
-    background-color: blue;
+    background-color: #929292;
     padding: 4px;
     margin: 4px;
     border-radius: 4px;
     display: inline-block;
+}
+
+a:hover {
+    background-color: #8c1d29;
 }
 
 body {
@@ -75,11 +79,11 @@ main {
     justify-content: center;
 }
 
-main section:first-child {
-    width: 800px;
-}
+
 
 svg {
     width: 100%;
     height: auto;
 }
+
+
