@@ -160,7 +160,7 @@ foreach($todas_claves as $columna_clave => $hijos) {
         $document->endElement();
 
 
-        $document->writeElement('nav', 'Resultados Elecciones 2025');
+        $document->writeElement('nav', 'Resultados Elecciones Legislativas 2025');
 
         $document->startElement('main');
 
@@ -169,13 +169,15 @@ foreach($todas_claves as $columna_clave => $hijos) {
             $document->writeElement('h2', "POR " . ($hijos == 'seccion' ? 'comuna' : $hijos));
 
             if(!$columna_clave) {
+                
+
+                $document->writeRaw(file_get_contents('mapa.svg'));
+
                 $document->startElement('a');
                 $document->writeAttribute('href', $baseurl.'/mesa/30999');
                 $document->text('Privados de libertad');
                 $document->endElement();
 
-
-                $document->writeRaw(file_get_contents('mapa.svg'));
             } else {
 
                 foreach($database->obtener_hijos_para($hijos, $columna_clave, $fila[$columna_clave]) as $id_hijo) {
@@ -242,36 +244,36 @@ foreach($todas_claves as $columna_clave => $hijos) {
 
         
         $document->writeElement('th', 'VOTOS TOTALES');
-        $document->writeElement('td', number_format($totalVotos, 2, '.', ','));     
+        $document->writeElement('td', number_format($totalVotos, 0, ',', '.'));     
         $document->endElement();
 
         $validos = $totalVotos - $votosEnBlanco - $votosImpugnados - $votosNulos - $votosRecurridos;
 
         $document->startElement('tr');
-        $document->writeElement('th', 'Votos validos');
-        $document->writeElement('td', number_format($validos , 2, '.', ','));     
+        $document->writeElement('th', 'Votos válidos');
+        $document->writeElement('td', number_format($validos , 0, ',', '.'));     
         $document->endElement(); 
 
         $document->startElement('tr');
         $document->writeElement('th', 'Votos en blanco');
-        $document->writeElement('td', number_format($votosEnBlanco, 2, '.', ','));     
+        $document->writeElement('td', number_format($votosEnBlanco, 0, ',', '.'));     
         $document->endElement(); 
 
 
         $document->startElement('tr');
         $document->writeElement('th', 'Votos impugnados');
-        $document->writeElement('td', number_format($votosImpugnados, 2, '.', ','));     
+        $document->writeElement('td', number_format($votosImpugnados, 0, ',', '.'));     
         $document->endElement(); 
 
         $document->startElement('tr');
         $document->writeElement('th', 'Votos nulos');
-        $document->writeElement('td', number_format($votosNulos, 2, '.', ','));     
+        $document->writeElement('td', number_format($votosNulos, 0, ',', '.'));     
         $document->endElement(); 
 
 
         $document->startElement('tr');
         $document->writeElement('th', 'Votos recurridos');
-        $document->writeElement('td', number_format($votosRecurridos, 2, '.', ','));     
+        $document->writeElement('td', number_format($votosRecurridos, 0, ',', '.'));     
         $document->endElement(); 
 
         $document->endElement();
@@ -309,7 +311,7 @@ foreach($todas_claves as $columna_clave => $hijos) {
         $document->writeElement(name: 'td');
         $document->writeElement('th','VOTOS TOTALES');
         $document->writeElement('th', '100%');
-        $document->writeElement('th',  number_format($totalVotos, 2, '.', ','));
+        $document->writeElement('th',  number_format($totalVotos, 0, ',', '.'));
         $document->writeElement('td');
         $document->endElement();
 
@@ -327,7 +329,7 @@ foreach($todas_claves as $columna_clave => $hijos) {
 
             $document->startElement('td');
             if ($totalVotos > 0) {
-                $percentage = round(($votos / $totalVotos) * 100, 2);
+                $percentage =    number_format(($votos / $totalVotos) * 100, 2, ',', '.');
                 $document->text($percentage . '%');
             } else {
                 $document->text('0%');
@@ -336,7 +338,7 @@ foreach($todas_claves as $columna_clave => $hijos) {
 
             $document->startElement('td');
 
-            $document->text( number_format($votos, 2, '.', ','));
+            $document->text( number_format($votos, 0, ',', '.'));
             $document->endElement();
 
             $document->startElement('td');
