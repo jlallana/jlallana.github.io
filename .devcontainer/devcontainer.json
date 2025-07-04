@@ -1,0 +1,13 @@
+{
+    "build": {
+        "dockerfile": "containerfile",
+        "context": ".."
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "DEVSENSE.phptools-vscode"
+            ]
+        }
+    }
+}

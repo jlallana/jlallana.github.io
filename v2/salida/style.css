@@ -1,0 +1,11 @@
+
+
+a:link, a:visited {
+    text-decoration: none;
+    color: white;
+    background-color: blue;
+    padding: 4px;
+    margin: 4px;
+    border-radius: 4px;
+    display: inline-block;
+}
