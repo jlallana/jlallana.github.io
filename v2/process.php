@@ -184,7 +184,7 @@ foreach($todas_claves as $columna_clave => $hijos) {
                     $document->startElement("a");
 
                     if($id_hijo == 'prueba') {
-                        $document->writeAttribute('href', $baseurl.'/mesa/???');
+                        $document->writeAttribute('href', $baseurl.'/mesa/'.(50000+ intval($slug)));
                         $document->text("MESA COMPENSADORA");
                     } else {
                         $document->writeAttribute('href', $baseurl.'/'. $hijos.'/'. slugify($id_hijo));
