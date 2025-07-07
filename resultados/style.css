@@ -18,19 +18,38 @@ a:hover path , a:hover circle {
     fill: #7a322f;
 }
 
+svg a:hover text {
+   font-size: 40px;
+   font-weight: bold;
+   margin-left: -30px;
+   margin-top: -5px;
+}
+
 
 a:link, a:visited {
     text-decoration: none;
-    color: white;
-    background-color: #929292;
+    color: black;
+    background-color: #eee;
     padding: 4px;
     margin: 4px;
     border-radius: 4px;
+}
+
+section > a {
     display: inline-block;
+}
+
+section div a {
+    display: block;
+}
+
+svg text {
+    font-size: 20px;
 }
 
 a:hover {
     background-color: #8c1d29;
+    color: white;
 }
 
 body {
@@ -99,14 +118,14 @@ svg {
 
 section {
     width: 800px;
-    height: 700px;
+    height: 720px;
     overflow-y: auto;
     margin: 20px;
     background-color: white;;
 }
 
 table {
-    font-size: 12px;
+    font-size: 13px;
     width: 100%;
 }
 
@@ -146,4 +165,13 @@ nav {
 
 table:nth-of-type(1) tbody tr:not(:first-child) th {
     padding-left: 30px;;
+}
+
+section div {
+    height: 640px;
+    overflow-y: auto;
+}
+
+section a {
+    font-size: 13px;
 }

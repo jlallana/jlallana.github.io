@@ -179,7 +179,7 @@ foreach($todas_claves as $columna_clave => $hijos) {
                 $document->endElement();
 
             } else {
-
+                $document->startElement('div');
                 foreach($database->obtener_hijos_para($hijos, $columna_clave, $fila[$columna_clave]) as $id_hijo) {
                     $document->startElement("a");
 
@@ -194,6 +194,7 @@ foreach($todas_claves as $columna_clave => $hijos) {
                     
                     $document->endElement();
                 }
+                $document->endElement();
             }
              $document->endElement();
         }
