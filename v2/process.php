@@ -182,8 +182,16 @@ foreach($todas_claves as $columna_clave => $hijos) {
 
                 foreach($database->obtener_hijos_para($hijos, $columna_clave, $fila[$columna_clave]) as $id_hijo) {
                     $document->startElement("a");
-                    $document->writeAttribute('href', $baseurl.'/'. $hijos.'/'. slugify($id_hijo));
-                    $document->text($id_hijo == 'prueba' ? "MESAS COMPENSADORAS" : $id_hijo);
+
+                    if($id_hijo == 'prueba') {
+                        $document->writeAttribute('href', $baseurl.'/mesa/???');
+                        $document->text("MESA COMPENSADORA");
+                    } else {
+                        $document->writeAttribute('href', $baseurl.'/'. $hijos.'/'. slugify($id_hijo));
+                        $document->text($id_hijo);
+                    }
+
+                    
                     $document->endElement();
                 }
             }
