@@ -175,6 +175,11 @@ section a {
 }
 
 
+
+a text {
+    text-shadow: 0px 0px 3px rgba(0,0,0,1);
+}
+
 a:nth-child(1) path , a:nth-child(1) circle {
     fill: #676862 ;
 }
