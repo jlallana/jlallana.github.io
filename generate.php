@@ -78,7 +78,7 @@ class DB {
 $database = new DB();
 
 $resultado = [];
-$baseurl = '/resultados';
+$baseurl = '';
 
 $fuerzas = [
     1 => 'Movimiento de Integración y Desarrollo',
@@ -126,11 +126,11 @@ foreach($todas_claves as $columna_clave => $hijos) {
         $document = new XMLWriter();
 
         if(!$columna_clave) {
-            $outputDir = 'resultados';
+            $outputDir = __DIR__;
         } else {
             $slug = slugify($fila[$columna_clave].'');
         
-            $outputDir = "resultados/$columna_clave/$slug";
+            $outputDir = __DIR__."/$columna_clave/$slug";
             if (!is_dir($outputDir)) {
                 mkdir($outputDir, 0777, true);
             }
@@ -138,7 +138,7 @@ foreach($todas_claves as $columna_clave => $hijos) {
 
         $document->openUri(uri: "$outputDir/index.html");
         $document->startDocument('1.0', 'UTF-8');
-        $document->setIndent(true);
+        $document->setIndent(false);
         $document->startElement('html');
 
         $document->startElement('head');
