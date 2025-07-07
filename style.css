@@ -46,7 +46,7 @@ svg text {
 }
 
 a:hover {
-    background-color: #8c1d29;
+    background-color: #174704;
     color: white;
 }
 
@@ -175,63 +175,63 @@ section a {
 }
 
 
-a:nth-child(1):hover path , a:nth-child(1):hover circle {
+a:nth-child(1) path , a:nth-child(1) circle {
     fill: #676862 ;
 }
 
-a:nth-child(2):hover path , a:nth-child(2):hover circle {
+a:nth-child(2) path , a:nth-child(2) circle {
     fill: #8c2c38;
 }
 
 
-a:nth-child(3):hover path , a:nth-child(3):hover circle {
+a:nth-child(3) path , a:nth-child(3) circle {
     fill: #174704;
 }
 
-a:nth-child(4):hover path , a:nth-child(4):hover circle {
+a:nth-child(4) path , a:nth-child(4) circle {
     fill: #E7E9DE;
 }
 
-a:nth-child(5):hover path , a:nth-child(5):hover circle {
+a:nth-child(5) path , a:nth-child(5) circle {
     fill: #676862;
 }
 
-a:nth-child(6):hover path , a:nth-child(6):hover circle {
+a:nth-child(6) path , a:nth-child(6) circle {
     fill: #8c2c38;
 }
 
-a:nth-child(7):hover path , a:nth-child(7):hover circle {
+a:nth-child(7) path , a:nth-child(7) circle {
     fill: #174704;
 }
 
-a:nth-child(8):hover path , a:nth-child(8):hover circle {
+a:nth-child(8) path , a:nth-child(8) circle {
     fill: #676862;
 }
 
-a:nth-child(9):hover path , a:nth-child(9):hover circle {
+a:nth-child(9) path , a:nth-child(9) circle {
     fill: #8c2c38;
 }
 
-a:nth-child(10):hover path , a:nth-child(10):hover circle {
+a:nth-child(10) path , a:nth-child(10) circle {
     fill: #676862;
 }
 
-a:nth-child(11):hover path , a:nth-child(11):hover circle {
+a:nth-child(11) path , a:nth-child(11) circle {
     fill: #E7E9DE;
 }
 
-a:nth-child(12):hover path , a:nth-child(12):hover circle {
+a:nth-child(12) path , a:nth-child(12) circle {
     fill: #676862;
 }
 
-a:nth-child(13):hover path , a:nth-child(13):hover circle {
+a:nth-child(13) path , a:nth-child(13) circle {
     fill: #E7E9DE;
 }
 
-a:nth-child(14):hover path , a:nth-child(14):hover circle {
+a:nth-child(14) path , a:nth-child(14) circle {
     fill: #676862;
 }
 
-a:nth-child(15):hover path , a:nth-child(15):hover circle {
+a:nth-child(15) path , a:nth-child(15) circle {
     fill: #174704;
 }
