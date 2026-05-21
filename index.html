@@ -104,10 +104,20 @@
     const campos = ['punto', 'p1', 'a1', 'ab1', 'p2', 'a2', 'ab2'];
     const btnConfirmar = document.getElementById('btn-confirmar');
 
-    // Habilitar Confirmar cuando todos los campos tienen valor
+    // Habilitar Confirmar cuando todos los campos tienen valor y los datos son consistentes
     campos.forEach(id => {
       document.getElementById(id).addEventListener('input', () => {
-        btnConfirmar.disabled = !campos.every(i => document.getElementById(i).value.trim() !== '');
+        const llenos = campos.every(i => document.getElementById(i).value.trim() !== '');
+        const p1 = +document.getElementById('p1').value;
+        const a1 = +document.getElementById('a1').value;
+        const ab1 = +document.getElementById('ab1').value;
+        const p2 = +document.getElementById('p2').value;
+        const a2 = +document.getElementById('a2').value;
+        const ab2 = +document.getElementById('ab2').value;
+        const consistente = (a1 + ab1 <= p1) && (a2 + ab2 <= p2);
+        document.getElementById('error-1').textContent = llenos && a1 + ab1 > p1 ? 'Los votos superan los presentes.' : '';
+        document.getElementById('error-2').textContent = llenos && a2 + ab2 > p2 ? 'Los votos superan los presentes.' : '';
+        btnConfirmar.disabled = !(llenos && consistente);
       });
     });
 
@@ -124,23 +134,11 @@
 
       // Limpiar errores previos
       document.getElementById('punto').classList.remove('is-invalid');
-      document.getElementById('error-1').textContent = '';
-      document.getElementById('error-2').textContent = '';
 
       let valido = true;
 
       if (!punto) {
         document.getElementById('punto').classList.add('is-invalid');
-        valido = false;
-      }
-
-      if (a1 + ab1 > p1) {
-        document.getElementById('error-1').textContent = 'Los votos superan los presentes.';
-        valido = false;
-      }
-
-      if (a2 + ab2 > p2) {
-        document.getElementById('error-2').textContent = 'Los votos superan los presentes.';
         valido = false;
       }
 
