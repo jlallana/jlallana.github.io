@@ -42,9 +42,9 @@ Dos fieldsets, uno por grupo, cada uno con los siguientes campos:
 
 El botón **Confirmar** se habilita cuando todos los campos tienen valor. Al confirmar se verifican las siguientes reglas; si alguna falla se muestra un error en el fieldset correspondiente y no se calcula el resultado:
 
-- El punto a votar no puede estar vacío.
-- En cada grupo, la suma de Afirmativo y Abstención no puede superar los Presentes.
-- Al menos uno de los dos grupos debe tener Presentes mayor a 0.
+- El punto a votar no puede estar vacío. → *"Ingresá el punto a votar."*
+- En cada grupo, la suma de Afirmativo y Abstención no puede superar los Presentes. → *"Los votos superan los presentes."*
+- Al menos uno de los dos grupos debe tener Presentes mayor a 0. → *"Al menos un grupo debe tener presentes."* (se muestra como alerta del navegador)
 
 ## Cálculo del resultado
 
@@ -58,6 +58,12 @@ Cada categoría (Afirmativo, Abstención y No voto) se calcula de la misma maner
 ### Formato
 
 Los porcentajes se muestran redondeados a dos decimales. El resultado es puramente visual en pantalla.
+
+Las categorías siempre se muestran en este orden: Afirmativo, Abstención, No voto. Cada una tiene su color distintivo:
+
+- **Afirmativo:** verde
+- **Abstención:** rojo
+- **No voto:** gris
 
 ## Ejemplo práctico
 
