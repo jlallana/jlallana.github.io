@@ -3,6 +3,10 @@
 
 Herramienta web para que un administrador someta un punto a votación y contabilice en tiempo real los votos a mano alzada de dos grupos. Cada grupo tiene un peso distinto en el resultado: el Grupo 1 pondera 2/3 y el Grupo 2 pondera 1/3, reflejando una estructura de representación diferenciada. El resultado final se expresa en porcentajes ponderados para las tres categorías posibles: Afirmativo, Abstención y No voto.
 
+## Impresión
+
+Al imprimir la página desde el navegador, solo debe ser visible la sección de resultados: el punto votado, la tabla de porcentajes y las barras de progreso. Los botones de acción y el formulario deben ocultarse.
+
 ## Criterios técnicos
 
 - Una sola página HTML con todo incluido (HTML, CSS y JS en el mismo archivo).
@@ -12,7 +16,13 @@ Herramienta web para que un administrador someta un punto a votación y contabil
 
 ## Flujo general
 
-El administrador ingresa el texto del punto a votar y los datos de ambos grupos. Al presionar **Confirmar**, se ejecuta la validación (campos requeridos y consistencia de datos). Si todo es válido, se muestra la sección de resultados encabezada por el punto votado, con una tabla de porcentajes y una barra de progreso por categoría. Debajo aparece un botón **Votar de nuevo** que reinicia el ciclo.
+La página carga mostrando el formulario. La sección de resultados está oculta.
+
+El administrador completa el punto a votar y los datos de ambos grupos. El botón **Confirmar** permanece deshabilitado hasta que todos los campos obligatorios tengan valor. Al presionar **Confirmar**, se ejecutan las validaciones adicionales. Si todo es válido, el formulario se oculta y se muestra la sección de resultados.
+
+Desde la sección de resultados hay dos acciones posibles:
+- **Corregir:** oculta los resultados y vuelve al formulario con los datos intactos para que el administrador los revise.
+- **Votar de nuevo:** limpia el formulario por completo y reinicia el ciclo.
 
 ## Formulario principal (`index.html`)
 
@@ -27,6 +37,14 @@ Dos fieldsets, uno por grupo, cada uno con los siguientes campos:
 - **Presentes:** cantidad de personas presentes en el grupo (entero, obligatorio, mínimo 0).
 - **Afirmativo:** cantidad de personas que votan afirmativo (entero, obligatorio, mínimo 0).
 - **Abstención:** cantidad de personas que se abstienen (entero, obligatorio, mínimo 0).
+
+## Validaciones
+
+El botón **Confirmar** se habilita cuando todos los campos tienen valor. Al confirmar se verifican las siguientes reglas; si alguna falla se muestra un error en el fieldset correspondiente y no se calcula el resultado:
+
+- El punto a votar no puede estar vacío.
+- En cada grupo, la suma de Afirmativo y Abstención no puede superar los Presentes.
+- Al menos uno de los dos grupos debe tener Presentes mayor a 0.
 
 ## Cálculo del resultado
 
@@ -65,5 +83,5 @@ El Grupo 1 tiene el doble de presentes que el Grupo 2 y una mayoría afirmativa 
 | **Abstención** | (2/12 × 2/3) + (4/9 × 1/3) | **22.22%** |
 | **No voto** | (2/12 × 2/3) + (2/9 × 1/3) | **22.22%** |
 
-Debajo de la tabla aparece una barra de progreso por categoría y el botón **Votar de nuevo** para iniciar una nueva votación.
+Debajo de la tabla aparece una barra de progreso por categoría y los botones **Corregir** y **Votar de nuevo**.
 
