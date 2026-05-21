@@ -77,11 +77,11 @@
     <blockquote class="blockquote border-start ps-3 mb-4" id="resultado-punto"></blockquote>
 
     <table class="table table-bordered w-auto mb-4">
-      <thead><tr><th>Categoría</th><th>Porcentaje</th></tr></thead>
+      <thead><tr><th>Categoría</th><th>Porcentaje</th><th class="text-muted fst-italic fw-normal small">Cálculo</th></tr></thead>
       <tbody>
-        <tr><td>Afirmativo</td><td id="r-afirmativo"></td></tr>
-        <tr><td>Abstención</td><td id="r-abstencion"></td></tr>
-        <tr><td>No voto</td><td id="r-novoto"></td></tr>
+        <tr><td>Afirmativo</td><td id="r-afirmativo"></td><td class="text-muted fst-italic small" id="c-afirmativo"></td></tr>
+        <tr><td>Abstención</td><td id="r-abstencion"></td><td class="text-muted fst-italic small" id="c-abstencion"></td></tr>
+        <tr><td>No voto</td><td id="r-novoto"></td><td class="text-muted fst-italic small" id="c-novoto"></td></tr>
       </tbody>
     </table>
 
@@ -156,6 +156,18 @@
       const afirmativo = ((p1 > 0 ? a1/p1 : 0) * peso1 + (p2 > 0 ? a2/p2 : 0) * peso2) * 100;
       const abstencion = ((p1 > 0 ? ab1/p1 : 0) * peso1 + (p2 > 0 ? ab2/p2 : 0) * peso2) * 100;
       const novoto = 100 - afirmativo - abstencion;
+
+      const fmt = (n, d) => `(${n}/${d} × 2/3)`;
+      const fmt2 = (n, d) => `(${n}/${d} × 1/3)`;
+      const calcStr = (n1, d1, n2, d2) => {
+        if (d1 > 0 && d2 > 0) return `(${n1}/${d1} × 2/3) + (${n2}/${d2} × 1/3)`;
+        if (d1 > 0) return `${n1}/${d1}`;
+        return `${n2}/${d2}`;
+      };
+
+      document.getElementById('c-afirmativo').textContent = calcStr(a1, p1, a2, p2);
+      document.getElementById('c-abstencion').textContent = calcStr(ab1, p1, ab2, p2);
+      document.getElementById('c-novoto').textContent = calcStr(p1 - a1 - ab1, p1, p2 - a2 - ab2, p2);
 
       document.getElementById('resultado-punto').textContent = punto;
       document.getElementById('r-afirmativo').textContent = afirmativo.toFixed(2) + '%';

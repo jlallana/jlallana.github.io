@@ -18,7 +18,7 @@ Al imprimir la página desde el navegador, solo debe ser visible la sección de 
 
 La página carga mostrando el formulario. La sección de resultados está oculta.
 
-El administrador completa el punto a votar y los datos de ambos grupos. El botón **Confirmar** permanece deshabilitado hasta que todos los campos obligatorios tengan valor. Al presionar **Confirmar**, se ejecutan las validaciones adicionales. Si todo es válido, el formulario se oculta y se muestra la sección de resultados.
+El administrador completa el punto a votar y los datos de ambos grupos. El botón **Confirmar** permanece deshabilitado hasta que todos los campos obligatorios tengan valor. Al presionar **Confirmar**, se ejecutan las validaciones adicionales. Si todo es válido, el formulario se oculta y se muestra la sección de resultados. La tabla de resultados incluye una columna adicional con el cálculo detallado de cada categoría, en gris cursiva, para que el administrador pueda validar los números.
 
 Desde la sección de resultados hay dos acciones posibles:
 - **Corregir:** oculta los resultados y vuelve al formulario con los datos intactos para que el administrador los revise.
@@ -40,10 +40,13 @@ Dos fieldsets, uno por grupo, cada uno con los siguientes campos:
 
 ## Validaciones
 
-El botón **Confirmar** se habilita cuando todos los campos tienen valor. Al confirmar se verifican las siguientes reglas; si alguna falla se muestra un error en el fieldset correspondiente y no se calcula el resultado:
+El botón **Confirmar** se habilita únicamente cuando todos los campos tienen valor y los datos son consistentes. Las siguientes reglas se validan en tiempo real mientras el administrador escribe:
+
+- En cada grupo, la suma de Afirmativo y Abstención no puede superar los Presentes. → *"Los votos superan los presentes."* (se muestra debajo del fieldset correspondiente)
+
+Al presionar **Confirmar** se verifica:
 
 - El punto a votar no puede estar vacío. → *"Ingresá el punto a votar."*
-- En cada grupo, la suma de Afirmativo y Abstención no puede superar los Presentes. → *"Los votos superan los presentes."*
 - Al menos uno de los dos grupos debe tener Presentes mayor a 0. → *"Al menos un grupo debe tener presentes."* (se muestra como alerta del navegador)
 
 ## Cálculo del resultado
