@@ -221,6 +221,8 @@
       indice = 0;
       esAnexo = false;
       $('form-votacion').reset();
+      $('lista-puntos').innerHTML = '';
+      agregarTextarea();
       $('seccion-resultados').classList.add('d-none');
       $('seccion-inicio').classList.remove('d-none');
     });

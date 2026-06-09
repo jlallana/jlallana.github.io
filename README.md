@@ -35,7 +35,7 @@ El administrador completa los datos de ambos grupos y presiona **Confirmar**. Si
 Desde la sección de resultados hay tres acciones posibles:
 - **Corregir:** oculta los resultados y vuelve al formulario con los datos intactos para que el administrador los revise.
 - **Votar anexo:** disponible solo si el punto actual no es un anexo. Abre una nueva votación numerada como `N.1` (por ejemplo, si se acaba de votar el punto 3, el anexo es el punto 3.1). El campo de texto del anexo es editable, ya que no tiene texto predefinido. Al confirmar el resultado del anexo, la única opción disponible es pasar al siguiente punto (no hay anexo del anexo).
-- **Siguiente punto:** limpia los campos de los grupos, carga el siguiente punto predefinido y muestra el formulario. Si ya se votaron todos los puntos, el botón no aparece.
+- **Reiniciar:** disponible al terminar el último punto. Vuelve a la pantalla de inicio con una sola textarea vacía, lista para cargar una nueva sesión de votación.
 
 ## Pantalla de inicio
 
