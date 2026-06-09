@@ -18,7 +18,7 @@ Al imprimir la página desde el navegador, solo debe ser visible la sección de 
 
 La página tiene un encabezado con fondo de color y el título del sistema en texto blanco, visible en todo momento.
 
-La página carga mostrando el formulario con el primer punto predefinido ya cargado en el campo de texto (solo lectura). La sección de resultados está oculta.
+La página carga mostrando la **pantalla de inicio**, donde el administrador puede revisar y editar los 5 puntos a votar antes de comenzar. Una vez confirmados, comienza el ciclo de votación y ya no se puede volver a la pantalla de inicio.
 
 El administrador completa los datos de ambos grupos y presiona **Confirmar**. Si todo es válido, el formulario se oculta y se muestra la sección de resultados.
 
@@ -27,15 +27,19 @@ Desde la sección de resultados hay tres acciones posibles:
 - **Votar anexo:** disponible solo si el punto actual no es un anexo. Abre una nueva votación numerada como `N.1` (por ejemplo, si se acaba de votar el punto 3, el anexo es el punto 3.1). El campo de texto del anexo es editable, ya que no tiene texto predefinido. Al confirmar el resultado del anexo, la única opción disponible es pasar al siguiente punto (no hay anexo del anexo).
 - **Siguiente punto:** limpia los campos de los grupos, carga el siguiente punto predefinido y muestra el formulario. Si ya se votaron todos los puntos, el botón no aparece.
 
+## Pantalla de inicio
+
+Muestra 5 textareas numeradas, una por punto a votar, precargadas con los textos predefinidos. El administrador puede modificarlos antes de comenzar. Al presionar **Comenzar**, se inicia el ciclo de votación con los textos ingresados.
+
 ## Formulario principal (`index.html`)
 
 ### Puntos a votar
 
-Lista de 10 textos predefinidos hardcodeados en el archivo. El campo que muestra el punto actual es de solo lectura; el administrador no puede modificarlo.
+Una vez iniciado el ciclo, el campo que muestra el punto actual es de solo lectura; el administrador no puede modificarlo.
 
 Cuando se vota un anexo, el campo de texto es editable y el administrador debe ingresar el texto manualmente.
 
-Se muestra un indicador del progreso actual, por ejemplo: *"Punto 3 de 10"* o *"Punto 3.1 (anexo)"*.
+Se muestra un indicador del progreso actual, por ejemplo: *"Punto 3 de 5"* o *"Punto 3.1 (anexo)"*.
 
 ### Grupos
 
