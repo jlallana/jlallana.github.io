@@ -39,7 +39,7 @@ Desde la sección de resultados hay tres acciones posibles:
 
 ## Pantalla de inicio
 
-Muestra una sola textarea precargada con un texto de ejemplo. El administrador puede modificarla y agregar más puntos con el botón **Agregar punto**, que añade una nueva textarea vacía al final de la lista. No hay límite de puntos. Al presionar **Comenzar**, se inicia el ciclo de votación con los textos ingresados. Si alguna textarea está vacía, se ignora.
+Muestra una textarea vacía numerada. El administrador debe ingresar el texto del punto a votar. Puede agregar más puntos con el botón **Agregar punto**, que añade una nueva textarea vacía al final de la lista. No hay límite de puntos. Ningún punto puede estar vacío al presionar **Comenzar**.
 
 ## Formulario principal (`index.html`)
 

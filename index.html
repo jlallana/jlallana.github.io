@@ -117,10 +117,6 @@
   </div>
 
   <script>
-    const puntosDefault = [
-      'Se propone modificar el reglamento interno para que las reuniones ordinarias pasen de frecuencia semanal a quincenal.',
-    ];
-
     let puntos = [];
     let indice = 0;
     let esAnexo = false;
@@ -142,7 +138,7 @@
       lista.appendChild(wrap);
     };
 
-    puntosDefault.forEach(t => agregarTextarea(t));
+    agregarTextarea();
 
     $('btn-agregar').addEventListener('click', () => agregarTextarea());
 
@@ -150,6 +146,8 @@
       puntos = [...document.querySelectorAll('.punto-input')]
         .map(ta => ta.value.trim()).filter(t => t);
       if (puntos.length === 0) { alert('Ingresá al menos un punto a votar.'); return; }
+      const vacios = [...document.querySelectorAll('.punto-input')].some(ta => !ta.value.trim());
+      if (vacios) { alert('Hay puntos vacíos. Completalos o eliminalos antes de comenzar.'); return; }
       indice = 0;
       cargarPunto();
       $('seccion-inicio').classList.add('d-none');
