@@ -97,6 +97,7 @@
 
     <div class="no-print">
       <button class="btn btn-secondary me-2" id="btn-corregir">Corregir</button>
+      <button class="btn btn-outline-secondary me-2" id="btn-anexo">Votar anexo</button>
       <button class="btn btn-outline-primary" id="btn-siguiente">Siguiente punto</button>
     </div>
   </div>
@@ -113,6 +114,7 @@
     ];
 
     let indice = 0;
+    let esAnexo = false;
 
     const $ = id => document.getElementById(id);
     const val = id => +$(id).value;
@@ -124,7 +126,15 @@
 
     const cargarPunto = () => {
       $('punto').value = puntos[indice];
+      $('punto').readOnly = true;
+      $('punto').classList.add('bg-light');
       $('progreso').textContent = `Punto ${indice + 1} de ${puntos.length}`;
+    };
+
+    const mostrarBotones = () => {
+      const esUltimo = indice === puntos.length - 1;
+      $('btn-anexo').classList.toggle('d-none', esAnexo);
+      $('btn-siguiente').classList.toggle('d-none', esUltimo && !esAnexo);
     };
 
     $('form-votacion').addEventListener('submit', function(e) {
@@ -155,8 +165,7 @@
         $(`bar-${k}`).value = pct;
       });
 
-      const esUltimo = indice === puntos.length - 1;
-      $('btn-siguiente').classList.toggle('d-none', esUltimo);
+      mostrarBotones();
 
       $('seccion-formulario').classList.add('d-none');
       $('seccion-resultados').classList.remove('d-none');
@@ -167,8 +176,20 @@
       $('seccion-formulario').classList.remove('d-none');
     });
 
+    $('btn-anexo').addEventListener('click', () => {
+      esAnexo = true;
+      $('form-votacion').reset();
+      $('punto').value = '';
+      $('punto').readOnly = false;
+      $('punto').classList.remove('bg-light');
+      $('progreso').textContent = `Punto ${indice + 1}.1 (anexo)`;
+      $('seccion-resultados').classList.add('d-none');
+      $('seccion-formulario').classList.remove('d-none');
+    });
+
     $('btn-siguiente').addEventListener('click', () => {
       indice++;
+      esAnexo = false;
       $('form-votacion').reset();
       cargarPunto();
       $('seccion-resultados').classList.add('d-none');

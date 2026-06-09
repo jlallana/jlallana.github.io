@@ -22,8 +22,9 @@ La página carga mostrando el formulario con el primer punto predefinido ya carg
 
 El administrador completa los datos de ambos grupos y presiona **Confirmar**. Si todo es válido, el formulario se oculta y se muestra la sección de resultados.
 
-Desde la sección de resultados hay dos acciones posibles:
+Desde la sección de resultados hay tres acciones posibles:
 - **Corregir:** oculta los resultados y vuelve al formulario con los datos intactos para que el administrador los revise.
+- **Votar anexo:** disponible solo si el punto actual no es un anexo. Abre una nueva votación numerada como `N.1` (por ejemplo, si se acaba de votar el punto 3, el anexo es el punto 3.1). El campo de texto del anexo es editable, ya que no tiene texto predefinido. Al confirmar el resultado del anexo, la única opción disponible es pasar al siguiente punto (no hay anexo del anexo).
 - **Siguiente punto:** limpia los campos de los grupos, carga el siguiente punto predefinido y muestra el formulario. Si ya se votaron todos los puntos, el botón no aparece.
 
 ## Formulario principal (`index.html`)
@@ -32,7 +33,9 @@ Desde la sección de resultados hay dos acciones posibles:
 
 Lista de 10 textos predefinidos hardcodeados en el archivo. El campo que muestra el punto actual es de solo lectura; el administrador no puede modificarlo.
 
-Se muestra un indicador del progreso actual, por ejemplo: *"Punto 3 de 10"*.
+Cuando se vota un anexo, el campo de texto es editable y el administrador debe ingresar el texto manualmente.
+
+Se muestra un indicador del progreso actual, por ejemplo: *"Punto 3 de 10"* o *"Punto 3.1 (anexo)"*.
 
 ### Grupos
 
