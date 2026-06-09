@@ -106,6 +106,7 @@
       <button class="btn btn-secondary me-2" id="btn-corregir">Corregir</button>
       <button class="btn btn-outline-secondary me-2" id="btn-anexo">Votar anexo</button>
       <button class="btn btn-outline-primary" id="btn-siguiente">Siguiente punto</button>
+      <button class="btn btn-outline-danger d-none" id="btn-reiniciar">Reiniciar</button>
     </div>
   </div>
 
@@ -167,6 +168,7 @@
       const esUltimo = indice === puntos.length - 1;
       $('btn-anexo').classList.toggle('d-none', esAnexo);
       $('btn-siguiente').classList.toggle('d-none', esUltimo && !esAnexo);
+      $('btn-reiniciar').classList.toggle('d-none', !(esUltimo && !esAnexo));
     };
 
     $('form-votacion').addEventListener('submit', function(e) {
@@ -216,6 +218,14 @@
       $('progreso').textContent = `Punto ${indice + 1}.1 (anexo)`;
       $('seccion-resultados').classList.add('d-none');
       $('seccion-formulario').classList.remove('d-none');
+    });
+
+    $('btn-reiniciar').addEventListener('click', () => {
+      indice = 0;
+      esAnexo = false;
+      $('form-votacion').reset();
+      $('seccion-resultados').classList.add('d-none');
+      $('seccion-inicio').classList.remove('d-none');
     });
 
     $('btn-siguiente').addEventListener('click', () => {
