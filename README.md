@@ -29,7 +29,7 @@ Desde la sección de resultados hay tres acciones posibles:
 
 ## Pantalla de inicio
 
-Muestra 5 textareas numeradas, una por punto a votar, precargadas con los textos predefinidos. El administrador puede modificarlos antes de comenzar. Al presionar **Comenzar**, se inicia el ciclo de votación con los textos ingresados.
+Muestra una sola textarea precargada con un texto de ejemplo. El administrador puede modificarla y agregar más puntos con el botón **Agregar punto**, que añade una nueva textarea vacía al final de la lista. No hay límite de puntos. Al presionar **Comenzar**, se inicia el ciclo de votación con los textos ingresados. Si alguna textarea está vacía, se ignora.
 
 ## Formulario principal (`index.html`)
 
