@@ -22,9 +22,10 @@
 
   <!-- INICIO -->
   <div id="seccion-inicio">
-    <p class="text-muted">Revisá y editá los puntos a votar antes de comenzar.</p>
+    <p class="text-muted">Ingresá los puntos a votar antes de comenzar.</p>
     <div id="lista-puntos"></div>
-    <button class="btn btn-primary mt-3" id="btn-comenzar">Comenzar</button>
+    <button type="button" class="btn btn-outline-secondary mt-2 me-2" id="btn-agregar">+ Agregar punto</button>
+    <button type="button" class="btn btn-primary mt-2" id="btn-comenzar">Comenzar</button>
   </div>
 
   <!-- FORMULARIO -->
@@ -115,10 +116,6 @@
   <script>
     const puntosDefault = [
       'Se propone modificar el reglamento interno para que las reuniones ordinarias pasen de frecuencia semanal a quincenal.',
-      'Se propone aprobar el presupuesto anual presentado por la comisión directiva para el ejercicio en curso.',
-      'Se propone incorporar un nuevo vocal titular a la comisión directiva mediante elección directa.',
-      'Se propone autorizar la firma de un convenio de colaboración con la organización vecinal del distrito.',
-      'Se propone crear un fondo de emergencia equivalente al 10% del presupuesto anual.',
     ];
 
     let puntos = [];
@@ -133,23 +130,22 @@
       p2: val('p2'), a2: val('a2'), ab2: val('ab2')
     });
 
-    // Construir pantalla de inicio
-    const lista = $('lista-puntos');
-    puntosDefault.forEach((texto, i) => {
-      const label = document.createElement('label');
-      label.className = 'form-label fw-bold mt-3';
-      label.textContent = `Punto ${i + 1}`;
-      const ta = document.createElement('textarea');
-      ta.className = 'form-control mb-1';
-      ta.rows = 2;
-      ta.id = `inicio-punto-${i}`;
-      ta.value = texto;
-      lista.appendChild(label);
-      lista.appendChild(ta);
-    });
+    const agregarTextarea = (valor = '') => {
+      const lista = $('lista-puntos');
+      const n = lista.children.length + 1;
+      const wrap = document.createElement('div');
+      wrap.className = 'mb-2';
+      wrap.innerHTML = `<label class="form-label fw-bold">Punto ${n}</label><textarea class="form-control punto-input" rows="2">${valor}</textarea>`;
+      lista.appendChild(wrap);
+    };
+
+    puntosDefault.forEach(t => agregarTextarea(t));
+
+    $('btn-agregar').addEventListener('click', () => agregarTextarea());
 
     $('btn-comenzar').addEventListener('click', () => {
-      puntos = puntosDefault.map((_, i) => $(`inicio-punto-${i}`).value.trim()).filter(t => t);
+      puntos = [...document.querySelectorAll('.punto-input')]
+        .map(ta => ta.value.trim()).filter(t => t);
       if (puntos.length === 0) { alert('Ingresá al menos un punto a votar.'); return; }
       indice = 0;
       cargarPunto();
