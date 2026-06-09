@@ -20,8 +20,15 @@
 
   <div class="container">
 
+  <!-- INICIO -->
+  <div id="seccion-inicio">
+    <p class="text-muted">Revisá y editá los puntos a votar antes de comenzar.</p>
+    <div id="lista-puntos"></div>
+    <button class="btn btn-primary mt-3" id="btn-comenzar">Comenzar</button>
+  </div>
+
   <!-- FORMULARIO -->
-  <div id="seccion-formulario">
+  <div id="seccion-formulario" class="d-none">
     <form id="form-votacion" novalidate>
 
       <div class="mb-4">
@@ -105,7 +112,7 @@
   </div>
 
   <script>
-    const puntos = [
+    const puntosDefault = [
       'Se propone modificar el reglamento interno para que las reuniones ordinarias pasen de frecuencia semanal a quincenal.',
       'Se propone aprobar el presupuesto anual presentado por la comisión directiva para el ejercicio en curso.',
       'Se propone incorporar un nuevo vocal titular a la comisión directiva mediante elección directa.',
@@ -113,6 +120,7 @@
       'Se propone crear un fondo de emergencia equivalente al 10% del presupuesto anual.',
     ];
 
+    let puntos = [];
     let indice = 0;
     let esAnexo = false;
 
@@ -122,6 +130,30 @@
       punto: $('punto').value.trim(),
       p1: val('p1'), a1: val('a1'), ab1: val('ab1'),
       p2: val('p2'), a2: val('a2'), ab2: val('ab2')
+    });
+
+    // Construir pantalla de inicio
+    const lista = $('lista-puntos');
+    puntosDefault.forEach((texto, i) => {
+      const label = document.createElement('label');
+      label.className = 'form-label fw-bold mt-3';
+      label.textContent = `Punto ${i + 1}`;
+      const ta = document.createElement('textarea');
+      ta.className = 'form-control mb-1';
+      ta.rows = 2;
+      ta.id = `inicio-punto-${i}`;
+      ta.value = texto;
+      lista.appendChild(label);
+      lista.appendChild(ta);
+    });
+
+    $('btn-comenzar').addEventListener('click', () => {
+      puntos = puntosDefault.map((_, i) => $(`inicio-punto-${i}`).value.trim()).filter(t => t);
+      if (puntos.length === 0) { alert('Ingresá al menos un punto a votar.'); return; }
+      indice = 0;
+      cargarPunto();
+      $('seccion-inicio').classList.add('d-none');
+      $('seccion-formulario').classList.remove('d-none');
     });
 
     const cargarPunto = () => {
@@ -166,7 +198,6 @@
       });
 
       mostrarBotones();
-
       $('seccion-formulario').classList.add('d-none');
       $('seccion-resultados').classList.remove('d-none');
     });
@@ -195,8 +226,6 @@
       $('seccion-resultados').classList.add('d-none');
       $('seccion-formulario').classList.remove('d-none');
     });
-
-    cargarPunto();
   </script>
 
 </body>
