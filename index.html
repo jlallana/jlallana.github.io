@@ -25,9 +25,11 @@
     <form id="form-votacion" novalidate>
 
       <div class="mb-4">
-        <label for="punto" class="form-label fw-bold">Punto a votar</label>
-        <textarea id="punto" class="form-control" rows="3" required></textarea>
-        <div class="invalid-feedback">Ingresá el punto a votar.</div>
+        <div class="d-flex justify-content-between align-items-baseline mb-1">
+          <label class="form-label fw-bold mb-0">Punto a votar</label>
+          <small class="text-muted" id="progreso"></small>
+        </div>
+        <textarea id="punto" class="form-control bg-light" rows="3" readonly></textarea>
       </div>
 
       <div class="row g-4">
@@ -95,13 +97,23 @@
 
     <div class="no-print">
       <button class="btn btn-secondary me-2" id="btn-corregir">Corregir</button>
-      <button class="btn btn-outline-primary" id="btn-nuevo">Votar de nuevo</button>
+      <button class="btn btn-outline-primary" id="btn-siguiente">Siguiente punto</button>
     </div>
   </div>
 
   </div>
 
   <script>
+    const puntos = [
+      'Se propone modificar el reglamento interno para que las reuniones ordinarias pasen de frecuencia semanal a quincenal.',
+      'Se propone aprobar el presupuesto anual presentado por la comisión directiva para el ejercicio en curso.',
+      'Se propone incorporar un nuevo vocal titular a la comisión directiva mediante elección directa.',
+      'Se propone autorizar la firma de un convenio de colaboración con la organización vecinal del distrito.',
+      'Se propone crear un fondo de emergencia equivalente al 10% del presupuesto anual.',
+    ];
+
+    let indice = 0;
+
     const $ = id => document.getElementById(id);
     const val = id => +$(id).value;
     const getDatos = () => ({
@@ -110,11 +122,15 @@
       p2: val('p2'), a2: val('a2'), ab2: val('ab2')
     });
 
+    const cargarPunto = () => {
+      $('punto').value = puntos[indice];
+      $('progreso').textContent = `Punto ${indice + 1} de ${puntos.length}`;
+    };
+
     $('form-votacion').addEventListener('submit', function(e) {
       e.preventDefault();
       const { punto, p1, a1, ab1, p2, a2, ab2 } = getDatos();
 
-      if (!punto) { alert('Ingresá el punto a votar.'); return; }
       if (a1 + ab1 > p1) { alert('Grupo 1: los votos superan los presentes.'); return; }
       if (a2 + ab2 > p2) { alert('Grupo 2: los votos superan los presentes.'); return; }
       if (p1 === 0 && p2 === 0) { alert('Al menos un grupo debe tener presentes.'); return; }
@@ -139,6 +155,9 @@
         $(`bar-${k}`).value = pct;
       });
 
+      const esUltimo = indice === puntos.length - 1;
+      $('btn-siguiente').classList.toggle('d-none', esUltimo);
+
       $('seccion-formulario').classList.add('d-none');
       $('seccion-resultados').classList.remove('d-none');
     });
@@ -148,11 +167,15 @@
       $('seccion-formulario').classList.remove('d-none');
     });
 
-    $('btn-nuevo').addEventListener('click', () => {
+    $('btn-siguiente').addEventListener('click', () => {
+      indice++;
       $('form-votacion').reset();
+      cargarPunto();
       $('seccion-resultados').classList.add('d-none');
       $('seccion-formulario').classList.remove('d-none');
     });
+
+    cargarPunto();
   </script>
 
 </body>

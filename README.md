@@ -1,7 +1,7 @@
 
 # Sistema de votación
 
-Herramienta web para que un administrador someta un punto a votación y contabilice en tiempo real los votos a mano alzada de dos grupos. Cada grupo tiene un peso distinto en el resultado: el Grupo 1 pondera 2/3 y el Grupo 2 pondera 1/3, reflejando una estructura de representación diferenciada. El resultado final se expresa en porcentajes ponderados para las tres categorías posibles: Afirmativo, Abstención y No voto.
+Herramienta web para que un administrador someta a votación una lista de puntos predefinidos y contabilice en tiempo real los votos a mano alzada de dos grupos. Cada grupo tiene un peso distinto en el resultado: el Grupo 1 pondera 2/3 y el Grupo 2 pondera 1/3, reflejando una estructura de representación diferenciada. El resultado final se expresa en porcentajes ponderados para las tres categorías posibles: Afirmativo, Abstención y No voto.
 
 ## Impresión
 
@@ -18,19 +18,21 @@ Al imprimir la página desde el navegador, solo debe ser visible la sección de 
 
 La página tiene un encabezado con fondo de color y el título del sistema en texto blanco, visible en todo momento.
 
-La página carga mostrando el formulario. La sección de resultados está oculta.
+La página carga mostrando el formulario con el primer punto predefinido ya cargado en el campo de texto (solo lectura). La sección de resultados está oculta.
 
-El administrador completa el punto a votar y los datos de ambos grupos. El botón **Confirmar** permanece deshabilitado hasta que todos los campos obligatorios tengan valor. Al presionar **Confirmar**, se ejecutan las validaciones adicionales. Si todo es válido, el formulario se oculta y se muestra la sección de resultados, sin título propio. Cada categoría se muestra como una barra de progreso precedida por su nombre, el porcentaje y el cálculo detallado en gris cursiva.
+El administrador completa los datos de ambos grupos y presiona **Confirmar**. Si todo es válido, el formulario se oculta y se muestra la sección de resultados.
 
 Desde la sección de resultados hay dos acciones posibles:
 - **Corregir:** oculta los resultados y vuelve al formulario con los datos intactos para que el administrador los revise.
-- **Votar de nuevo:** limpia el formulario por completo y reinicia el ciclo.
+- **Siguiente punto:** limpia los campos de los grupos, carga el siguiente punto predefinido y muestra el formulario. Si ya se votaron todos los puntos, el botón no aparece.
 
 ## Formulario principal (`index.html`)
 
-### Punto a votar
+### Puntos a votar
 
-Campo de texto multilinea, obligatorio.
+Lista de 10 textos predefinidos hardcodeados en el archivo. El campo que muestra el punto actual es de solo lectura; el administrador no puede modificarlo.
+
+Se muestra un indicador del progreso actual, por ejemplo: *"Punto 3 de 10"*.
 
 ### Grupos
 
