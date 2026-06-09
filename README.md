@@ -3,7 +3,17 @@
 
 Herramienta web para que un administrador someta a votación una lista de puntos predefinidos y contabilice en tiempo real los votos a mano alzada de dos grupos. Cada grupo tiene un peso distinto en el resultado: el Grupo 1 pondera 2/3 y el Grupo 2 pondera 1/3, reflejando una estructura de representación diferenciada. El resultado final se expresa en porcentajes ponderados para las tres categorías posibles: Afirmativo, Abstención y No voto.
 
-## Impresión
+## PWA (instalación offline)
+
+La aplicación funciona como PWA: el navegador muestra un botón para instalarla en el dispositivo y funciona sin conexión una vez instalada.
+
+Requiere tres archivos adicionales al `index.html`:
+
+- **`manifest.json`:** define el nombre, ícono y colores de la app.
+- **`sw.js`:** service worker que cachea los archivos necesarios al primer acceso.
+- Dos líneas en `index.html` para enlazar el manifest y registrar el service worker.
+
+
 
 Al imprimir la página desde el navegador, solo debe ser visible la sección de resultados: el punto votado, la tabla de porcentajes y las barras de progreso. Los botones de acción y el formulario deben ocultarse.
 
